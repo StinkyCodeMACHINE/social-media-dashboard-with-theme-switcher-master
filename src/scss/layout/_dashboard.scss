@@ -1,0 +1,391 @@
+@use "../util/functions" as u;
+
+@mixin colors($bg, $tbg, $cbg, $t1, $t2, $toggle) {
+  .dashboard__top {
+    &__heading-and-stuff {
+      h1 {
+        color: $t2;
+        transition: 500ms color ease-in-out;
+      }
+
+      div {
+        color: $t1;
+        transition: 500ms color ease-in-out;
+      }
+    }
+
+    &__dark-mode-container {
+      &__text {
+        color: $t1;
+        transition: 500ms color ease-in-out;
+      }
+
+      &__button-container {
+        background: $toggle;
+        transition: 500ms background ease-in-out;
+        &__button {
+          background-color: $bg;
+        }
+      }
+    }
+
+    @media (max-width: 700px) {
+      &__heading-and-stuff {
+        border-bottom: 1px solid $t1;
+      }
+    }
+  }
+
+  .dashboard__follower-stats {
+    &__card {
+      background-color: $cbg;
+      transition: 500ms background-color ease-in-out;
+      &__top-info {
+        color: $t1;
+        transition: 500ms color ease-in-out;
+      }
+
+      &__total-followers {
+        color: $t2;
+        transition: 500ms color ease-in-out;
+        span {
+          color: $t1;
+          transition: 500ms color ease-in-out;
+        }
+      }
+
+      &__followers-gained {
+        &.positive {
+          color: var(--lime-green);
+        }
+
+        &.negative {
+          color: var(--bright-red);
+        }
+      }
+    }
+  }
+
+  .dashboard__additional-stats {
+    h2 {
+      color: $t1;
+      transition: 500ms color ease-in-out;
+    }
+
+    &__container {
+      &__card {
+        background-color: $cbg;
+        transition: 500ms background-color ease-in-out;
+
+        &__top-info {
+          color: $t1;
+          transition: 500ms color ease-in-out;
+        }
+
+        &__stat {
+          &__total-amount {
+            color: $t2;
+            transition: 500ms color ease-in-out;
+          }
+
+          &__diff {
+            &.positive {
+              color: var(--lime-green);
+            }
+
+            &.negative {
+              color: var(--bright-red);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2.7rem;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__heading-and-stuff {
+      h1 {
+        font-size: 1.75rem;
+        margin-bottom: 0.5rem;
+      }
+      div {
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+    }
+
+    &__dark-mode-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      &__text {
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      &__button-container {
+        width: 45px;
+        height: 24px;
+        border-radius: 1rem;
+        position: relative;
+        cursor: pointer;
+
+        &__button {
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          position: absolute;
+          top: 50%;
+          left: 8%;
+          transition: 500ms transform, 500ms background-color ease-in-out;
+        }
+      }
+    }
+
+    @media (max-width: 700px) {
+      display: block;
+
+      &__heading-and-stuff {
+        padding-bottom: 1rem;
+        margin-bottom: 1rem;
+        h1 {
+          font-size: 1.4rem;
+          margin-bottom: 0.2rem;
+        }
+        div {
+          font-weight: 700;
+          font-size: 0.85rem;
+        }
+      }
+
+      &__dark-mode-container {
+        justify-content: space-between;
+
+        &__text {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  &__follower-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 255px);
+    gap: 2rem;
+    justify-content: space-between;
+
+    &__card-wrapper {
+      border-radius: 0.5rem 0.5rem 1rem 1rem;
+      padding-top: 0.3rem;
+      &.card-wrapper-1 {
+        background: var(--facebook);
+      }
+
+      &.card-wrapper-2 {
+        background: var(--instagram);
+      }
+
+      &.card-wrapper-3 {
+        background: var(--twitter);
+      }
+
+      &.card-wrapper-4 {
+        background: var(--youtube);
+      }
+    }
+
+    &__card {
+      padding: 1.65rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      height: 100%;
+      box-sizing: border-box;
+      border-radius: 0 0 0.5rem 0.5rem;
+      cursor: pointer;
+
+      &__top-info {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+
+        div {
+          font-weight: 700;
+          font-size: 0.7rem;
+        }
+      }
+      &__total-followers {
+        font-size: 3.5rem;
+        font-weight: 700;
+        span {
+          display: block;
+          text-transform: uppercase;
+          font-weight: 400;
+          font-size: 0.8rem;
+          text-align: center;
+          letter-spacing: 0.3rem;
+        }
+      }
+      &__followers-gained {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        margin-top: 0.75rem;
+        img {
+          width: 10px;
+        }
+
+        font-weight: 700;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__additional-stats {
+    h2 {
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+
+    &__container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 255px);
+      gap: 2rem;
+      justify-content: space-between;
+
+      &__card {
+        padding: 1.65rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border-radius: 0.5rem;
+        cursor: pointer;
+
+        &__top-info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          div {
+            font-weight: 700;
+          }
+
+          img {
+          }
+        }
+
+        &__stat {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          &__total-amount {
+            font-weight: 700;
+            font-size: 2.5rem;
+          }
+
+          &__diff {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            img {
+              width: 10px;
+            }
+
+            font-weight: 700;
+            font-size: 0.8rem;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 700px) {
+      &__container {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  &.light-mode {
+    @include colors(
+      var(--bg-l),
+      var(--tbg-l),
+      var(--cbg-l),
+      var(--t1-l),
+      var(--t2-l),
+      var(--toggle-l)
+    );
+
+    .dashboard__top {
+      &__dark-mode-container {
+        &__button-container {
+          &__button {
+            transform: translateY(-50%) translateX(110%);
+          }
+        }
+      }
+    }
+
+    .dashboard__follower-stats__card-wrapper {
+      &:hover {
+        filter: brightness(90%);
+      }
+    }
+
+    .dashboard__additional-stats__container__card {
+      &:hover {
+        filter: brightness(90%);
+      }
+    }
+  }
+
+  &.dark-mode {
+    @include colors(
+      var(--bg-d),
+      var(--tbg-d),
+      var(--cbg-d),
+      var(--t1-d),
+      var(--t2-d),
+      var(--toggle-d)
+    );
+
+    .dashboard__top {
+      &__dark-mode-container {
+        &__button-container {
+          &__button {
+            transform: translateY(-50%) translateX(0%);
+          }
+        }
+      }
+    }
+
+    .dashboard__follower-stats__card {
+      &:hover {
+        filter: brightness(150%);
+      }
+    }
+
+    .dashboard__additional-stats__container__card {
+      &:hover {
+        filter: brightness(150%);
+      }
+    }
+  }
+}
