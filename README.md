@@ -19,7 +19,7 @@ This is a solution to the [Social media dashboard with theme switcher challenge 
 
 ### Links
 
-- Live Site URL: [https://amazing-tartufo-5c3bd7.netlify.app/](https://amazing-tartufo-5c3bd7.netlify.app/)
+- Live Site URL: [https://beamish-hamster-32dfb4.netlify.app/](https://beamish-hamster-32dfb4.netlify.app/)
 
 ## My process
 
